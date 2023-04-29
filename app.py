@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request
 import redis
 
@@ -9,33 +8,32 @@ r = redis.Redis()
 def index():
   data = {}
   if request.method == 'POST':
-    r.set(request.form['nombre'], request.form['significado'])
-    data['mensaje'] = "Palabra ingresada"
-  data['palabras'] = obtenerPalabras()
+    r.set(request.form['word'], request.form['meaning'])
+    data['message'] = "Word added successfully"
+  data['words'] = getWords()
   return render_template('index.html',data=data)
 
-@app.route('/eliminar/<nombre>',methods=['GET'])
-def eliminar(nombre):
-  r.delete(nombre)
-  data = {'mensaje': 'Palabra eliminada'}
-  data['palabras'] = obtenerPalabras()
+@app.route('/delete/<word>',methods=['GET'])
+def delete(word):
+  r.delete(word)
+  data = {'message': 'Word deleted successfully'}
+  data['words'] = getWords()
   return render_template('index.html',data=data)
 
-@app.route('/editar/<nombre>', methods=['GET'])
-def editar(nombre):
-  data = {'palabra':{'significado':r.get(nombre).decode('UTF-8'),'nombre':nombre}}
-  data['palabras'] = obtenerPalabras()
+@app.route('/edit/<word>', methods=['GET'])
+def edit(word):
+  data = {'word':{'meaning':r.get(word).decode('UTF-8'),'name':word}}
+  data['words'] = getWords()
   return render_template('index.html',data=data)
 
-
-def obtenerPalabras():
-  palabras = []
+def getWords():
+  words = []
   for i in r.keys():
-    palabras.append({
-      'nombre': i.decode("UTF-8"),
-      'significado': r.get(i).decode('UTF-8')
+    words.append({
+      'name': i.decode("UTF-8"),
+      'meaning': r.get(i).decode('UTF-8')
     })
-  return palabras
+  return words
 
 if __name__ == "__main__":
   app.run(debug=True)

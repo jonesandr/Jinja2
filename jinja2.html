@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>App</title>
+  <title>Modismos Panameños</title>
 </head>
 
 <body>
@@ -53,46 +53,4 @@
                   <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
                 </div>
                 <div class="mb-3">
-                  <textarea name="significado" class="form-control" rows="5" placeholder="Significado"
-                    required></textarea>
-                </div>
-                <button class="btn btn-primary w-100" type="submit">Agregar</button>
-              </form>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      <div class="col-7">
-        <div class="card">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Significado</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for i in data['palabras'] %}
-              <tr>
-                <td>{{ i['nombre'] }}</td>
-                <td>{{ i['significado'] }}</td>
-                <td>
-                  <a href="/editar/{{ i['nombre'] }}" class="text-warning me-2">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </a>
-                  <a href="/eliminar/{{ i['nombre'] }}" class="text-danger">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </a>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-
-</html>
+                  <textarea name="significado" class="form-control" rows="5
